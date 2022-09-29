@@ -7,16 +7,15 @@ type Props = {
     xAxisData: number[] | string[]
     yAxisData: number[]
     title?: string
-    xLabel?: string
-    yLabel?: string
+    options?: ChartOptions
 }
 
-const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
+const LineChart = ({ xAxisData, yAxisData, title, options }: Props) => {
     const legendOptions: ChartLegendOptions = {
         display: false,
     }
 
-    const options: ChartOptions = {
+    const chartOptions: ChartOptions = {
         title: {
             display: !!title,
             text: title,
@@ -25,18 +24,18 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
             gridLines: { display: false },
             yAxes: [
                 {
-                    scaleLabel: { display: !!yLabel, labelString: yLabel },
+                    position: 'right',
                     gridLines: { display: false },
                 },
             ],
             xAxes: [
                 {
-                    scaleLabel: { display: !!xLabel, labelString: xLabel },
                     ticks: { display: true },
                     gridLines: { display: false },
                 },
             ],
         },
+        ...options,
     }
 
     return (
@@ -48,10 +47,11 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
                         backgroundColor: theme.colors.blue100,
                         borderColor: theme.colors.primary,
                         data: yAxisData,
+                        pointHoverBackgroundColor: theme.colors.primary,
                     },
                 ],
             }}
-            options={options}
+            options={chartOptions}
             legend={legendOptions}
         />
     )
