@@ -44,7 +44,7 @@ export const Chart = ({ data }: Props) => {
                 .format(Number(value))
                 .toString()
         },
-        []
+        [currency]
     )
 
     const options: ChartOptions = useMemo(
